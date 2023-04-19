@@ -1,0 +1,12 @@
+h2 {
+  color: green;
+  font-size: 30px;
+}
+.primary-btn {
+  color: orange;
+  font-size: 30px;
+}
+#btn1 {
+  box-shadow: none;
+  color: rgb(13, 0, 255);
+}

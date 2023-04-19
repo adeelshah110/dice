@@ -1,0 +1,46 @@
+{
+  "name": "window-date-picker-react",
+  "version": "1.0.0",
+  "description": "ReactJS integration for Window Date Picker",
+  "keywords": [
+    "javascript",
+    "react",
+    "date",
+    "time",
+    "hour",
+    "input",
+    "picker"
+  ],
+  "author": {
+    "name": "Cevad Tokatli",
+    "email": "cevadtokatli@hotmail.com",
+    "url": "http://cevadtokatli.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cevadtokatli/window-date-picker-react"
+  },
+  "files": [
+    "src",
+    "dist",
+    "gulpfile.js"
+  ],
+  "main": "dist/js/window-date-picker.min.js",
+  "module": "dist/js/window-date-picker.esm.js",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "rollup": "^0.66.2",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.1.8",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "window-date-picker": "^1.0.0"
+  }
+}

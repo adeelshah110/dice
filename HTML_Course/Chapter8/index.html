@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=2.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="../Chapter2/index.html">
+      <label for="firstName">First Name</label>
+      <br />
+      <input id="firstName" name="firstName" required/>
+      <br />
+      <label for="lastName">Last Name</label>
+      <br />
+      <input id="lastName" name="lastName" required />
+      <br />
+      <label for="RollNumber">Roll Number</label>
+      <br />
+      <input id="RollNumber" name="RollNumber" type="number" required />
+
+      <p>Please select gender</p>
+      <label for="Male">Male</label>
+      <input id="Male" name="gender" type="radio" />
+
+      <label for="Female">Female</label>
+      <input id="Female" name="gender" type="radio" />
+
+      <label for="Others">Others</label>
+      <input id="Others" name="gender" type="radio" />
+      <br />
+      <label for="class">Select Class</label>
+      <br />
+      <select name="" id="class">
+        <option value="">Select your Class</option>
+        <option value="1">Class1</option>
+        <option value="2">Class2</option>
+        <option value="3">Class3</option>
+        <option value="4">Class4</option>
+        <option value="5">Class5</option>
+      </select>
+      <label for="ice-cream-choice">Choose a flavor:</label>
+      <input
+        list="ice-cream-flavors"
+        id="ice-cream-choice"
+        name="ice-cream-choice"
+      />
+
+      <datalist id="ice-cream-flavors">
+        <option value="Chocolate"></option>
+        <option value="Coconut"></option>
+        <option value="Mint"></option>
+        <option value="Strawberry"></option>
+        <option value="Vanilla"></option>
+      </datalist>
+      <label for="about">About me</label>
+      <textarea name="about" id=about" cols="30" rows="10"></textarea>
+      <button type="submit" class="primary-btn">Submit</button>
+      <button type="reset" className="primary-btn">reset</button>
+    </form>
+  </body>
+</html>
