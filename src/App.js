@@ -67,7 +67,7 @@ const App=() =>{
             <Flex pb="10">
 
               {
-              numbers && numbers.map((value)=>
+              
                 <Flex      
                     justify = "center"
                     align = "center"
@@ -88,7 +88,7 @@ const App=() =>{
             </Flex>
  
           <Box h='150px' w="150px" on onClick={genRandomNo}>
-            <Image src ={`/dice/dice${dice}.png`}/>
+            <Image src ={`/dice/dice${dice}.PNG`}/>
           </Box> 
 
           <Text as = "p" fontSize="xl">Click on dice to roll</Text>
@@ -123,7 +123,7 @@ const App=() =>{
     justify="center"
     >
     <Image 
-     src ="dices.png"
+     src ="dices.PNG"
      widh = "50%"
      />
     <Stack>
