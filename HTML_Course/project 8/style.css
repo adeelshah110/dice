@@ -65,6 +65,21 @@ section h2 {
   font-weight: 400px;
 }
 
+.steps {
+  display: flex;
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.output_example {
+  display: flex;
+  font-size: 20px;
+  background-color: gray;
+  align-items: center;
+  color: white;
+}
 @media (max-width: 480px) {
   body {
     flex-direction: column;

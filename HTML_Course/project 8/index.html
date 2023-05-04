@@ -51,6 +51,7 @@
             Manual keyword assignment is labor intensive, time consuming, and
             error prone.
           </p>
+
           <p>
             Specialized curators use fxed taxonomies for manual keyword
             generation, but in some cases, the keywords chosen by the author are
@@ -149,6 +150,376 @@
             the proposed method on a dataset of webpages in three languages:
             English, Finnish, and German.
           </p>
+          <h1>Drank Python Implementaion</h1>
+
+          <h5 class="steps">(1) Get Clean Text of Webpage</h5>
+          <pre>
+            <code>
+              # Imports
+              import urllib
+              import nltk
+              import sys
+              import re 
+              
+              import lxml
+              import math
+              import string
+              import textwrap
+              import requests
+              
+              from nltk.corpus import stopwords
+              from bs4 import BeautifulSoup
+              from nltk import word_tokenize
+              from nltk.stem import WordNetLemmatizer
+              from collections import defaultdict,Counter
+              from nltk.corpus import stopwords
+              from collections import defaultdict 
+              from bs4.element import Comment
+              
+              import pandas as pd 
+              import numpy as np
+              
+              def Scrapper1(element):
+                  if element.parent.name in ['html','style', 'script', 'head',  '[document]','img']:
+                      return False
+                  if isinstance(element, Comment):
+                      return False
+                  return True
+              
+              def Scrapper2(body):             
+                  soup = BeautifulSoup(body, 'lxml')      
+                  texts = soup.findAll(text=True)   
+                  name =soup.findAll(name=True) 
+                  visible_texts = filter(Scrapper1,texts)        
+                  return u" ".join(t.strip() for t in visible_texts)
+              
+              def Scrapper3(text):                  
+                  lines = (line.strip() for line in text.splitlines())    
+                  chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+                  return u'\n'.join(chunk for chunk in chunks if chunk)
+              
+              
+              def Scrapper_title_4(urls):
+                req = urllib.request.Request(urls, headers={'User-Agent' : "Magic Browser"})
+                con = urllib.request.urlopen(req)
+                html= con.read()
+                title=[]
+                
+                soup = BeautifulSoup(html, 'lxml') 
+                title.append(soup.title.string)
+                return(title,urls)
+              
+              def Web(URL):
+                req = urllib.request.Request(URL, headers={'User-Agent' : "Magic Browser"})
+                con = urllib.request.urlopen(req)
+                html= con.read()  
+              
+               Raw_HTML_Soup = BeautifulSoup(html, 'lxml') 
+               
+                raw =Scrapper2(html)
+                Clean_Text = Scrapper3(raw) 
+                return(Clean_Text,Raw_HTML_Soup)
+          <h2>Calling WEb Function
+
+            (Clean_Text,Raw_HTML_Soup) = Web("http://bbc.com")
+            print (Clean_Text)</h2>
+            </code>
+            <div class ="output_example">
+              BBC - Homepage
+Homepage Accessibility links Skip to content Accessibility Help BBC Account Notifications Home News Sport Weather iPlayer Sounds Bitesize CBeebies CBBC Food Home News Sport Reel Worklife Travel Future Culture TV Weather Sounds More menu
+Search BBC
+Search BBC
+Home News Sport Weather iPlayer Sounds Bitesize CBeebies CBBC Food Home News Sport Reel Worklife Travel Future Culture TV Weather Sounds Close menu
+BBC Homepage
+Putin should be sentenced for 'criminal actions' - Zelensky
+The Ukrainian president calls for the creation of a new war tribunal as he addresses The Hague.
+Europe
+Putin should be sentenced for 'criminal actions' - Zelensky
+Teen made 'kill list' for Serbia school attack
+Europe
+Teen made 'kill list' for Serbia school attack
+Erdogan rival pledges to restore Turkish democracy
+Europe
+Erdogan rival pledges to restore Turkish democracy
+What kings wore from Tudor times to now
+Culture
+What kings wore from Tudor times to now
+The true story of the Kentucky Derby
+Travel
+The true story of the Kentucky Derby
+News
+Ros Atkins on... the videos showing 'Kremlin attack'
+The BBC’s Analysis Editor looks at the footage circulating on Russian social media.
+Europe
+Ros Atkins on... the videos showing 'Kremlin attack'
+Pioneering actress killed in Sudan cross-fire
+Asia Abdelmajid, famous for her stage performances, is buried in the grounds of a kindergarten.
+Africa
+Pioneering actress killed in Sudan cross-fire
+Carrie Fisher family row eclipses Hollywood honour
+The Star Wars actress's siblings are not invited to her Hollywood Walk of Fame ceremony.
+Entertainment & Arts
+Carrie Fisher family row eclipses Hollywood honour
+Sport
+Premier League news and your views on Haaland, Allardyce
+Manchester City beat West Ham to top table again as Erling Haaland sets new Premier League record, plus Crystal Palace among news conferences.
+Football
+Premier League news and your views on Haaland, Allardyce
+Why Bellingham's Real move makes 'perfect sense'
+England midfielder Jude Bellingham joining Real Madrid would be in keeping with their strategy of buying the world's best young players, says Andy West.
+European Football
+Why Bellingham's Real move makes 'perfect sense'
+A tour of a lost world, before football changed forever
+Thirty-five years ago, a father and son set off to tour every Football League ground. They brought back a record of a disappearing era and a lasting relationship.
+Sport
+A tour of a lost world, before football changed forever
+Coronation of King Charles III
+Your full guide to how Coronation day will unfold
+Processions, ancient rituals, a fly-past and the crowning moment
+UK
+Your full guide to how Coronation day will unfold
+A chicken dish made for the queen
+The famous dish has been reimagined by a variety of chefs over the years
+World's Table
+A chicken dish made for the queen
+Charles is King of 15 countries - but for how much longer?
+BBC correspondents describe the mood in nations where King Charles is still head of state and the chances of replacing the monarchy any time soon
+World
+Charles is King of 15 countries - but for how much longer?
+London Weather
+Edit
+Thu
+19°C
+12°C
+Fri
+18°C
+10°C
+Sat
+16°C
+12°C
+Sun
+19°C
+10°C
+Visit Reel
+The most amazing videos from the BBC
+The truth about the Kama Sutra
+Why do French men pee on the street?
+Is this the real face of Elizabeth I?
+Editor’s Picks
+Do you own too many clothes?
+The 'sufficient' wardrobe
+Future
+Do you own too many clothes?
+A regal scone made for King Charles III
+Shaped into a crown, it's infused with Darjeeling and honey
+Travel
+A regal scone made for King Charles III
+Can remote-work gossip backfire?
+Why venting about your boss just became much riskier
+Worklife
+Can remote-work gossip backfire?
+The rappers risking the death penalty
+How hip-hop has soundtracked Iran's protest era
+Culture
+The rappers risking the death penalty
+Why The Wicker Man has divided opinion for 50 years
+The folk horror film has been dividing audiences since it slipped into British cinemas
+UK
+Why The Wicker Man has divided opinion for 50 years
+Row over Met Gala's Karl Lagerfeld tribute
+Actress Jameela Jamil criticises the A-list event for honouring the controversial designer
+Entertainment & Arts
+Row over Met Gala's Karl Lagerfeld tribute
+The good and bad of ADHD content on TikTok
+Content about the condition gets billions of views, but is it driving too many to self-diagnose?
+Newsbeat
+The good and bad of ADHD content on TikTok
+Latest Business News
+1
+Shell reports stronger than expected profits
+2
+US raises interest rates to highest in 16 years
+3
+Investors sue over Credit Suisse collapse
+4
+China tourism rebounds above pre-pandemic levels
+5
+Branson feared 'losing everything' in pandemic
+Future Planet
+Solutions for a sustainable world
+The revival of a historic Italian fruit
+The first climate-resilient nation?
+A major positive climate tipping point
+Technology of Business
+Business
+Why there is serious money in kitchen fumes
+Why there is serious money in kitchen fumes
+ADVERTISEMENT
+New Tech Economy
+Business
+The people turning time into a currency
+The people turning time into a currency
+Featured video
+Inside hospital where oxygen runs out
+The BBC reports from an Afghan hospital where dozens of children are critically ill with preventable diseases.
+Asia
+Inside hospital where oxygen runs out
+Recommended
+Latest
+Inside hospital where oxygen runs out
+Asia
+Inside hospital where oxygen runs out
+Which route will the King take to his...
+UK
+Which route will the King take to his Coronation?
+Watch man arrested at Buckingham Palace gates
+UK
+Watch man arrested at Buckingham Palace gates
+Branson on 'painful' media coverage during...
+Business
+Branson on 'painful' media coverage during pandemic
+Watch first public outing for King's golden...
+UK
+Watch first public outing for King's golden carriages
+One-minute World News
+Video
+One-minute World News
+Minnesota senator appears topless during Zoom...
+US & Canada
+Minnesota senator appears topless during Zoom vote
+Princess Anne on what type of king her...
+US & Canada
+Princess Anne on what type of king her brother is
+Ryan Reynolds takes selfies on Wrexham...
+Wales
+Ryan Reynolds takes selfies on Wrexham winners' bus
+BBC World Service
+On Air:
+The Newsroom
+More around the BBC
+Lizzo thanks 'King of Flutes' for Met Gala duet
+The US star pays tribute to her idol Sir James Galway after the Belfast musician performs with her...
+Northern Ireland
+Lizzo thanks 'King of Flutes' for Met Gala duet
+Meta putting child users at risk, regulator says
+Technology
+Meta putting child users at risk, regulator says
+Europe's new weather satellite takes first photos
+Science & Environment
+Europe's new weather satellite takes first photos
+US approves world's first RSV vaccine
+US & Canada
+US approves world's first RSV vaccine
+The 17 most eye-catching looks at the Met Gala
+Entertainment & Arts
+The 17 most eye-catching looks at the Met Gala
+Australia to ban recreational vaping
+Australia
+Australia to ban recreational vaping
+Can Morocco solve Europe’s energy crisis?
+Business
+Can Morocco solve Europe’s energy crisis?
+From Our Correspondents
+New Alzheimer's drug slows disease by a third By James Gallagher
+Afghanistan: 'Nothing we can do but watch babies die' By Yogita Limaye
+Is your job at risk from AI? By Faisal Islam
+Is climate change killing Australian wine? By Tiffanie Turnbull
+Hero sled dog Balto's unique genes revealed By Madeline Halpert
+On-air fistfights, fetishes and raucous crowds By Sam Cabral
+Is the UK a bad place for tech firms? By Zoe Kleinman
+Living on the frontlines of a US-China flashpoint By Laura Bicker
+Global Trade
+Peru's 'fast and furious' blueberry boom
+Business
+Peru's 'fast and furious' blueberry boom
+New Tech Economy
+The wedding tech now at the heart of couples' nuptials
+Business
+The wedding tech now at the heart of couples' nuptials
+World in pictures
+Parasols and prayers: Africa's top shots
+Africa
+Parasols and prayers: Africa's top shots
+The photos that chronicle the cost of dying
+Scotland
+The photos that chronicle the cost of dying
+Len Goodman obituary: From the East End to Strictly stardom
+Entertainment & Arts
+Len Goodman obituary: From the East End to Strictly stardom
+Penarth: Nofio gyda'r wawr yn y môr // Sea swimming at dawn
+Cylchgrawn
+Penarth: Nofio gyda'r wawr yn y môr // Sea swimming at dawn
+In pictures: Muslims around the world celebrate Eid
+In Pictures
+In pictures: Muslims around the world celebrate Eid
+BBC in other languages
+Russian
+Война в Украине: Зеленский выступил в Гааге; Кремль обвиняет США в атаке беспилотниками
+Spanish
+"La vida de mi hijo fue sacrificada por las ganancias petroleras de BP"
+More Languages
+Arabic
+عربي
+Azeri
+AZƏRBAYCAN
+Bangla
+বাংলা
+Burmese
+မြန်မာ
+Chinese
+中文网
+French
+AFRIQUE
+Hausa
+HAUSA
+Hindi
+हिन्दी
+Indonesian
+INDONESIA
+Japanese
+日本語
+Kinyarwanda
+GAHUZA
+Kirundi
+KIRUNDI
+Kyrgyz
+Кыргыз
+Marathi
+मराठी
+Nepali
+नेपाली
+Pashto
+پښتو
+Persian
+فارسی
+Portuguese
+BRASIL
+Russian
+НА РУССКОМ
+Sinhala
+සිංහල
+Somali
+SOMALI
+Spanish
+MUNDO
+Swahili
+SWAHILI
+Tamil
+தமிழ்
+Turkish
+TÜRKÇE
+Ukrainian
+УКРАЇНСЬКA
+Urdu
+اردو
+Uzbek
+O'ZBEK
+Vietnamese
+TIẾNG VIỆT
+Explore the BBC Home News Sport Weather iPlayer Sounds Bitesize CBeebies CBBC Food Home News Sport Reel Worklife Travel Future Culture TV Weather Sounds Terms of Use About the BBC Privacy Policy Cookies Accessibility Help Parental Guidance Contact the BBC Make an editorial complaint BBC emails for you Advertise with us Copyright © 2023 BBC. The BBC is not responsible for the content of external sites. Read about our approach to external linking.
+<hr/>
+            </div>
+          </pre>
         </article>
       </section>
       <section id="Webrank">
